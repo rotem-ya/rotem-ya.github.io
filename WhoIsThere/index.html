@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מה בתמונה? · הורדה</title>
+<meta property="og:title" content="מה בתמונה? משחק ניחושים לכל המשפחה">
+<meta property="og:description" content="התמונה נחשפת משבצת אחרי משבצת. מי מזהה ראשון? חינם באנדרואיד ובאייפון.">
+<meta property="og:image" content="https://rotem-ya.github.io/WhoIsThere/share.jpg">
+<meta property="og:type" content="website">
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         font-family: -apple-system, "Segoe UI", "Heebo", Arial, sans-serif; color: #fff;
+         background: radial-gradient(circle at 50% 35%, #5b2aa0, #1c0b3a 70%); text-align: center; }
+  main { padding: 32px 20px; max-width: 420px; }
+  img.icon { width: 120px; height: 120px; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,.4); }
+  h1 { font-size: 40px; margin: 18px 0 6px; }
+  p { color: #e6dcff; font-size: 18px; margin: 0 0 26px; }
+  a.btn { display: block; margin: 12px auto; padding: 16px 20px; border-radius: 40px; font-size: 20px;
+          font-weight: 800; text-decoration: none; color: #2a1150; background: #ffc62d; }
+  a.btn.alt { background: #fff; }
+  small { display: block; margin-top: 22px; color: #bfb3dd; }
+</style>
+</head>
+<body>
+<main>
+  <img class="icon" src="icon.png" alt="">
+  <h1>מה בתמונה?</h1>
+  <p>התמונה נחשפת משבצת אחרי משבצת. מי מזהה ראשון?</p>
+  <a class="btn" id="play" href="https://play.google.com/store/apps/details?id=com.whoisthere.app">להורדה ב-Google Play</a>
+  <a class="btn alt" id="ios" href="https://apps.apple.com/app/id6776076758">להורדה ב-App Store</a>
+  <small>חינם · עברית · לכל המשפחה</small>
+</main>
+<script>
+  // One link for every post: phones go straight to their store. ?src=<channel>
+  // becomes the Play install referrer, so Play Console shows which post brought
+  // the install (Acquisition reports, by utm_source).
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var src = (q.get('src') || 'direct').replace(/[^a-z0-9_-]/gi, '').slice(0, 40);
+    var camp = (q.get('c') || 'organic').replace(/[^a-z0-9_-]/gi, '').slice(0, 40);
+    var ref = encodeURIComponent('utm_source=' + src + '&utm_medium=social&utm_campaign=' + camp);
+    var play = 'https://play.google.com/store/apps/details?id=com.whoisthere.app&referrer=' + ref;
+    var ios = 'https://apps.apple.com/app/id6776076758';
+    document.getElementById('play').href = play;
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isIOS) { location.replace(ios); }
+    else if (/Android/i.test(ua)) { location.replace(play); }
+  })();
+</script>
+</body>
+</html>
